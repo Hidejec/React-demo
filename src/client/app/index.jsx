@@ -1,17 +1,21 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import AwesomeComponent from './AwesomeComponent.jsx';
+import HomePage from './HomePage.jsx';
+import EmployeePage from './EmployeePage.jsx';
 
-class App extends React.Component {
-  render () {
-    return (
-    	<div>
-			<p> Hello react!</p>
-			<AwesomeComponent />
-		</div>
-	);
-  }
-}
+router.addRoute('', function() {
+    render(
+        <HomePage service={employeeService}/>,
+        document.getElementById('app')
+    );
+});
 
-render(<App/>, document.getElementById('app'));
+router.addRoute('employees/:id', function(id) {
+    render(
+        <EmployeePage employeeId={id} service={employeeService}/>,
+        document.getElementById('app')
+    );
+});
+
+router.start();
